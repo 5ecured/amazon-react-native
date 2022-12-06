@@ -4,6 +4,7 @@ A simple Amazone/eCommerce clone
 
 ## Tech stack
 
+- React Native
 - React Native CLI
 - TypeScript
 - AWS Amplify
