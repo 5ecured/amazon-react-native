@@ -1,14 +1,16 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, FlatList } from 'react-native'
 import React from 'react'
 import ProductItem from '../../components/ProductItem'
+import products from '../../data/products'
 
 const HomeScreen = () => {
     return (
         <View style={styles.page}>
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
+            <FlatList
+                data={products}
+                renderItem={({ item }) => <ProductItem item={item} />}
+                showsVerticalScrollIndicator={false}
+            />
         </View>
     )
 }
