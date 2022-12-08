@@ -34,7 +34,6 @@ const ImageCarousel: React.FC<CarouselProps> = ({ images }) => {
                     viewAreaCoveragePercentThreshold: 50
                 }}
                 onViewableItemsChanged={onFlatlistUpdate}
-
             />
 
             <View style={styles.dots}>
