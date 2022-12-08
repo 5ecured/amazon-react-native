@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     description: {
         marginVertical: 10,
         lineHeight: 20
+    },
+    title: {
+
     }
 })
 
