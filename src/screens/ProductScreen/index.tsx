@@ -5,15 +5,17 @@ import product from '../../data/product'
 import { Picker } from '@react-native-picker/picker'
 import QuantitySelector from '../../components/QuantitySelector'
 import Button from '../../components/Button'
+import ImageCarousel from '../../components/ImageCarousel'
 
 const ProductScreen = () => {
     const [selectedOption, setSelectedOption] = useState<string>(product.options?.[0])
     const [quantity, setQuantity] = useState<number>(1)
 
     return (
-        <View>
+        <View style={styles.root}>
             <Text style={styles.title}>{product.title}</Text>
-            {/* image carousel */}
+
+            <ImageCarousel images={product.images} />
 
             <Picker
                 selectedValue={selectedOption}

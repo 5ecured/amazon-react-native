@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({ text, onPress }) => {
 const styles = StyleSheet.create({
     root: {
         backgroundColor: '#e47911',
-        margin: 10,
+        marginVertical: 10,
         height: 35,
         justifyContent: 'center',
         alignItems: 'center',
