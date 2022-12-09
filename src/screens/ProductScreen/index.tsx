@@ -13,7 +13,6 @@ const ProductScreen = () => {
     const [quantity, setQuantity] = useState<number>(1)
 
     const route = useRoute()
-    console.warn(route.params)
 
     return (
         <ScrollView style={styles.root}>
