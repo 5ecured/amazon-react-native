@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, ScrollView } from 'react-native'
+import { View, Text, TextInput, Alert, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
 import React, { useState } from 'react'
 import { Picker } from '@react-native-picker/picker'
 import styles from './styles'
@@ -32,68 +32,73 @@ const AddressScreen = () => {
     }
 
     return (
-        <ScrollView style={styles.root}>
-            <View style={styles.row}>
-                <Picker selectedValue={country} onValueChange={setCountry} >
-                    <Picker.Item value='Singapore' label='Singapore' />
-                    <Picker.Item value='Indonesia' label='Indonesia' />
-                    <Picker.Item value='Japan' label='Japan' />
-                    <Picker.Item value='Australia' label='Australia' />
-                    <Picker.Item value='Italy' label='Italy' />
-                </Picker>
-            </View>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
+        >
+            <ScrollView style={styles.root}>
+                <View style={styles.row}>
+                    <Picker selectedValue={country} onValueChange={setCountry} >
+                        <Picker.Item value='Singapore' label='Singapore' />
+                        <Picker.Item value='Indonesia' label='Indonesia' />
+                        <Picker.Item value='Japan' label='Japan' />
+                        <Picker.Item value='Australia' label='Australia' />
+                        <Picker.Item value='Italy' label='Italy' />
+                    </Picker>
+                </View>
 
-            {/* Full name */}
-            <View style={styles.row}>
-                <Text style={styles.label}>Full name (First and Last name)</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Full name'
-                    value={fullname}
-                    onChangeText={setFullname}
-                />
-            </View>
+                {/* Full name */}
+                <View style={styles.row}>
+                    <Text style={styles.label}>Full name (First and Last name)</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Full name'
+                        value={fullname}
+                        onChangeText={setFullname}
+                    />
+                </View>
 
-            {/* Phone number */}
-            <View style={styles.row}>
-                <Text style={styles.label}>Phone number</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Phone number'
-                    value={phone}
-                    onChangeText={setPhone}
-                />
-            </View>
+                {/* Phone number */}
+                <View style={styles.row}>
+                    <Text style={styles.label}>Phone number</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Phone number'
+                        value={phone}
+                        onChangeText={setPhone}
+                    />
+                </View>
 
-            {/* Address */}
-            <View style={styles.row}>
-                <Text style={styles.label}>Address</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='Address'
-                    value={address}
-                    onEndEditing={validateAddress}
-                    onChangeText={text => {
-                        setAddress(text)
-                        setAddressError('')
-                    }}
-                />
-                {addressError && <Text style={styles.errorLabel}>{addressError}</Text>}
-            </View>
+                {/* Address */}
+                <View style={styles.row}>
+                    <Text style={styles.label}>Address</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='Address'
+                        value={address}
+                        onEndEditing={validateAddress}
+                        onChangeText={text => {
+                            setAddress(text)
+                            setAddressError('')
+                        }}
+                    />
+                    {addressError && <Text style={styles.errorLabel}>{addressError}</Text>}
+                </View>
 
-            {/* City */}
-            <View style={styles.row}>
-                <Text style={styles.label}>City</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder='City'
-                    value={city}
-                    onChangeText={setCity}
-                />
-            </View>
+                {/* City */}
+                <View style={styles.row}>
+                    <Text style={styles.label}>City</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder='City'
+                        value={city}
+                        onChangeText={setCity}
+                    />
+                </View>
 
-            <Button text='Checkout' onPress={onCheckout} />
-        </ScrollView>
+                <Button text='Checkout' onPress={onCheckout} />
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 }
 
