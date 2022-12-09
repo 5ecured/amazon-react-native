@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert } from 'react-native'
+import { View, Text, TextInput, Alert, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { Picker } from '@react-native-picker/picker'
 import styles from './styles'
@@ -32,7 +32,7 @@ const AddressScreen = () => {
     }
 
     return (
-        <View style={styles.root}>
+        <ScrollView style={styles.root}>
             <View style={styles.row}>
                 <Picker selectedValue={country} onValueChange={setCountry} >
                     <Picker.Item value='Singapore' label='Singapore' />
@@ -93,7 +93,7 @@ const AddressScreen = () => {
             </View>
 
             <Button text='Checkout' onPress={onCheckout} />
-        </View>
+        </ScrollView>
     )
 }
 
