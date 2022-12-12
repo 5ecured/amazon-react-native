@@ -8,4 +8,7 @@ A simple Amazone/eCommerce clone
 - React Native CLI
 - TypeScript
 - AWS Amplify
+- AWS AppSync
+- GraphQL
+- DynamoDB
 - Stripe
