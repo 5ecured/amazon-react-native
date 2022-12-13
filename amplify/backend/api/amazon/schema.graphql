@@ -1,10 +1,4 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
-
-
-# @model simply means this Product will be a what? will be a model
-type Product @model {
+type Product @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String!
   description: String
@@ -12,43 +6,16 @@ type Product @model {
   images: [String!]!
   options: [String!]
   avgRating: Float
-  rating: Integer
+  rating: Int
   price: Float!
   oldPrice: Float
 }
 
-type CartProduct @model {
+type CartProduct @model @auth(rules: [{allow: public}]) {
   id: ID!
-  quantity: Integer!
+  userSub: String!
+  quantity: Int!
   option: String
-
   productID: ID!
-  # @connection means "how is product going to return Product? by using a connection
-  product: Product @connection(fields: ["productID"])
-}
-
-type Order @model {
-  
-}
-
-
-
-
-# type Blog @model {
-#   id: ID!
-#   name: String!
-#   posts: [Post] @hasMany
-# }
-
-# type Post @model {
-#   id: ID!
-#   title: String!
-#   blog: Blog @belongsTo
-#   comments: [Comment] @hasMany
-# }
-
-# type Comment @model {
-#   id: ID!
-#   post: Post @belongsTo
-#   content: String!
-# }
+  product: Product @hasOne(fields: ["productID"])
+} 
