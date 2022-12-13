@@ -14,6 +14,12 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import 'react-native-gesture-handler'
 import Router from './src/router';
 
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from 'aws-amplify-react-native'
+import awsconfig from './src/aws-exports';
+
+Amplify.configure(awsconfig);
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
