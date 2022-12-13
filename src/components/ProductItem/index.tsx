@@ -45,8 +45,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ item: { id, title, image, avg
                     <Text>{ratings}</Text>
                 </View>
                 <Text style={styles.price}>
-                    from ${price}
-                    {oldPrice && <Text style={styles.oldPrice}> ${oldPrice}</Text>}
+                    from ${price.toFixed(2)}
+                    {oldPrice && <Text style={styles.oldPrice}> ${oldPrice.toFixed(2)}</Text>}
                 </Text>
             </View>
         </Pressable>
