@@ -9,7 +9,7 @@ interface CartProductItemProps {
         id: string
         quantity: number
         option?: string
-        item: {
+        product: {
             id: string,
             title: string,
             image: string,
@@ -22,8 +22,8 @@ interface CartProductItemProps {
 }
 
 const CartProductItem: React.FC<CartProductItemProps> = ({ cartItem }) => {
-    const { quantity: quantityProp, item, id } = cartItem
-    const { image, title, avgRating, ratings, oldPrice, price } = item
+    const { quantity: quantityProp, product, id } = cartItem
+    const { image, title, avgRating, ratings, oldPrice, price } = product
     const [quantity, setQuantity] = useState<number>(quantityProp)
 
     return (
