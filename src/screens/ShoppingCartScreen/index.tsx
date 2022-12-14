@@ -1,9 +1,13 @@
 import { View, StyleSheet, FlatList, Text } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CartProductItem from '../../components/CartProductItem'
 import products from '../../data/cart'
 import Button from '../../components/Button'
 import { useNavigation } from '@react-navigation/native'
+import { DataStore } from '@aws-amplify/datastore'
+import { Auth } from 'aws-amplify'
+import { Product, CartProduct } from '../../models';
+
 
 const ShoppingCartScreen = () => {
     const totalPrice = products.reduce((summedPrice, product) => (

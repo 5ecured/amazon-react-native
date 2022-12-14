@@ -6,16 +6,19 @@ import { Picker } from '@react-native-picker/picker'
 import QuantitySelector from '../../components/QuantitySelector'
 import Button from '../../components/Button'
 import ImageCarousel from '../../components/ImageCarousel'
-import { useRoute } from '@react-navigation/native'
+import { useRoute, useNavigation } from '@react-navigation/native'
 import { DataStore } from '@aws-amplify/datastore'
-import { Product } from '../../models';
+import { Product, CartProduct } from '../../models';
+import { Auth } from 'aws-amplify'
+
 
 const ProductScreen = () => {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null)
+    const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined)
     const [quantity, setQuantity] = useState<number>(1)
     const [product, setProduct] = useState<Product | undefined>(undefined)
 
     const route = useRoute()
+    const navigation = useNavigation()
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -33,6 +36,22 @@ const ProductScreen = () => {
             setSelectedOption(product.options[0])
         }
     }, [product])
+
+    const onAddToCart = async () => {
+        const userData = await Auth.currentAuthenticatedUser()
+
+        if (!product || !userData) return
+
+        const newCartProduct = new CartProduct({
+            userSub: userData.attributes.sub,
+            quantity,
+            option: selectedOption,
+            productID: product.id
+        })
+
+        await DataStore.save(newCartProduct)
+        navigation.navigate('Cart' as never)
+    }
 
     if (!product) {
         return <ActivityIndicator />
@@ -66,7 +85,7 @@ const ProductScreen = () => {
 
             <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
 
-            <Button text='Add to cart' onPress={() => console.warn('add to cart')} />
+            <Button text='Add to cart' onPress={onAddToCart} />
             <Button text='Buy now' onPress={() => console.warn('buy now!')} />
         </ScrollView>
     )
