@@ -13,10 +13,8 @@ import products from '../../data/products'
 const ShoppingCartScreen = () => {
     const [cartProducts, setCartProducts] = useState<CartProduct[]>([])
     const navigation = useNavigation()
-    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setLoading(true)
         const fetchCartProducts = async () => {
             // TODO query only my cart items
             const result = await DataStore.query(CartProduct)
@@ -45,11 +43,10 @@ const ShoppingCartScreen = () => {
         fetchProducts()
     }, [cartProducts])
 
-    const totalPrice = 0
 
-    // const totalPrice = cartProducts.reduce((summedPrice, product) => (
-    //     summedPrice + product.item.price * product.quantity
-    // ), 0)
+    const totalPrice = cartProducts.reduce((summedPrice, product) => (
+        summedPrice + product.item.price * product.quantity
+    ), 0)
 
 
     const onCheckout = () => {

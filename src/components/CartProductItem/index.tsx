@@ -22,33 +22,33 @@ interface CartProductItemProps {
 }
 
 const CartProductItem: React.FC<CartProductItemProps> = ({ cartItem }) => {
-    const { quantity: quantityProp, product, id } = cartItem
-    const { image, title, avgRating, ratings, oldPrice, price } = product
+    const { quantity: quantityProp, product } = cartItem
+    // const { image, title, avgRating, ratings, oldPrice, price } = product
     const [quantity, setQuantity] = useState<number>(quantityProp)
 
     return (
         <View style={styles.root}>
             <View style={styles.row}>
-                <Image style={styles.image} source={{ uri: image }} />
+                <Image style={styles.image} source={{ uri: product.image }} />
 
                 <View style={styles.rightContainer}>
-                    <Text style={styles.title} numberOfLines={3}>{title}</Text>
+                    <Text style={styles.title} numberOfLines={3}>{product.title}</Text>
                     <View style={styles.ratingsContainer}>
                         {[0, 0, 0, 0, 0].map((_, i) => (
                             <FontAwesome
-                                key={`${id}-${i}`}
+                                key={`${cartItem.id}-${i}`}
                                 style={styles.star}
-                                name={i < Math.floor(avgRating) ? 'star' : 'star-o'}
+                                name={i < Math.floor(product.avgRating) ? 'star' : 'star-o'}
                                 size={18}
                                 color={'#e47911'}
                             />
                         ))}
 
-                        <Text>{ratings}</Text>
+                        <Text>{product.ratings}</Text>
                     </View>
                     <Text style={styles.price}>
-                        from ${price}
-                        {oldPrice && <Text style={styles.oldPrice}> ${oldPrice}</Text>}
+                        from ${product.price}
+                        {product.oldPrice && <Text style={styles.oldPrice}> ${product.oldPrice}</Text>}
                     </Text>
                 </View>
             </View>
